@@ -96,13 +96,13 @@ class PlosSearch:
     # Iterator Protocol       
     def __iter__(self):
         return self
-        
+       
     def next(self):
         self.cursor += 1
         if self.cursor == len(self.docs):
             self.start += self.cursor
             rows = self.maxRows
-            if self.start >= self.limit:
+            if (self.start >= self.limit) or (self.start >= self.numFound):
                 raise StopIteration
 
             if (self.start + self.maxRows) > self.limit:
